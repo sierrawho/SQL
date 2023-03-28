@@ -28,14 +28,14 @@ FROM NetflixViewingHistory
 LEFT JOIN NetFlix ON NetflixViewingHistory.Title= NetFlix.title
 WHERE NetFlix.release_year IS NULL OR NetFlix.genres IS NULL or NetFlix.[type] IS NULL;
 
--- count how many movies and shows i've watched
+-- Count how many movies and shows i've watched
 SELECT NetFlix.[type], Count(NetFlix.[type]) AS 'Num of shows vs movies'
 FROM NetflixViewingHistory
 LEFT JOIN NetFlix ON NetflixViewingHistory.Title= NetFlix.title
 WHERE NetFlix.[type] = 'TV Show' OR NetFlix.[type] = 'Movie'
  GROUP by NetFlix.[type];
 
- --top shows ive watched remove distinct 
+ --Top shows ive watched remove distinct 
 SELECT TOP 10 NetflixViewingHistory.Title, Count(NetFlix.Title) AS 'Watch_Time'
 FROM NetflixViewingHistory
 LEFT JOIN NetFlix ON NetflixViewingHistory.Title= NetFlix.title
@@ -43,7 +43,7 @@ WHERE NetFlix.[type] = 'TV Show'
 GROUP by NetflixViewingHistory.Title
 ORDER BY [Watch_Time] DESC;
 
--- how many distinct shows and movies have I watch that were not null
+-- How many distinct shows and movies have I watch that were not null
 SELECT  Netflix.[type], COUNT(DISTINCT(NetflixViewingHistory.Title)) AS 'Num of shows/movies'
 FROM NetflixViewingHistory
 LEFT JOIN NetFlix ON NetflixViewingHistory.Title= NetFlix.title
